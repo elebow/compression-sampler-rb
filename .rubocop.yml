@@ -1,0 +1,14 @@
+---
+AllCops:
+  NewCops: enable
+
+Style/ClassAndModuleChildren:
+  Exclude:
+    - "test/**"
+
+Style/Documentation:
+  Exclude:
+    - "test/**"
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
