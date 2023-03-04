@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Lz77
+module LZ77
   # Decodes LZ77 data. The input is an array containing byte literals or 2-tuples of [offset, length] references.
   class Decoder
     attr_accessor :input

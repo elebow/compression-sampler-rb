@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Lz77
+module LZ77
   class SymbolLiteral
     def initialize(value)
       @value = value

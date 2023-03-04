@@ -2,7 +2,7 @@
 
 require "lz77/recent_window"
 
-module Lz77
+module LZ77
   # Encodes bytes using LZ77. The output is an array of byte literals and 2-tuples of [offset, length] references.
   class Encoder
     attr_accessor :input, :recent_window
@@ -14,7 +14,7 @@ module Lz77
     def initialize(input, window_size: nil)
       # input is an array of bytes
       @input = input
-      @recent_window = Lz77::RecentWindow.new(**{ max_size: window_size }.compact)
+      @recent_window = LZ77::RecentWindow.new(**{ max_size: window_size }.compact)
     end
 
     def encode

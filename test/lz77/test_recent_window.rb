@@ -2,9 +2,9 @@
 
 require_relative "../test_helper"
 
-class TestLz77RecentWindow < Minitest::Test
+class TestLZ77RecentWindow < Minitest::Test
   def setup
-    @recent_window = Lz77::RecentWindow.new(max_size: 10)
+    @recent_window = LZ77::RecentWindow.new(max_size: 10)
   end
 
   def test_add_data
