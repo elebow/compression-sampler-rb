@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "../test_helper"
+require "lz77/decoder"
 
 class TestLz77Decoder < Minitest::Test
   def test_decode

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "../test_helper"
+require "huffman/encoder"
 
 class TestHuffmanEncoder < Minitest::Test
   def test_encode

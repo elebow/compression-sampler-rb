@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative "../test_helper"
+require "deflate/huffman_writer"
 
 class TestHuffmanCanonicalizer < Minitest::Test
   def test_canonical_dict
