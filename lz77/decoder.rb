@@ -19,10 +19,11 @@ module LZ77
       Enumerator.new do |yielder|
         output = []
         input.each do |element|
-          if element.instance_of?(SymbolLiteral)
-            output.append(element.value)
-          else
-            element.length.times { output.append(output[-element.offset]) }
+          case element
+          in SymbolLiteral(value:)
+            output.append(value)
+          in SymbolReference(length:, offset:)
+            length.times { output.append(output[-offset]) }
           end
 
           # TODO output buffer must be at least as long as the encoder's maximum window size

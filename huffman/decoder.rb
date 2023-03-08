@@ -6,7 +6,7 @@ module Huffman
     attr_accessor :input, :canonical_dictionary
 
     def self.encode(input, canonical_dictionary:)
-      new(input, canonical_dictionary: canonical_dictionary).encode
+      new(input, canonical_dictionary:).encode
     end
 
     def initialize(input, canonical_dictionary:)
@@ -15,17 +15,7 @@ module Huffman
     end
 
     def decode
-      Enumerator.new do |yielder|
-        input.each { |symbol| yielder << dictionary[symbol] }
-      end
-    end
-
-    private
-
-    def dict
-      canonical_dictionary.transform_keys do |key|
-
-      end
+      input.map { |symbol| dictionary[symbol] }.lazy
     end
   end
 end
