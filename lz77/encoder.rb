@@ -3,7 +3,10 @@
 require "lz77/recent_window"
 
 module LZ77
-  # Encodes bytes using LZ77. The output is an array of byte literals and 2-tuples of [offset, length] references.
+  SymbolLiteral = Data.define(:value)
+  SymbolReference = Data.define(:offset, :length)
+
+  # Encodes bytes using LZ77. The output is an array of SymbolLiterals and SymbolReferences.
   class Encoder
     attr_accessor :input, :recent_window
 
@@ -26,9 +29,9 @@ module LZ77
 
           if longest_match[:length] < 3
             # For short matches, referencing gives no advantage
-            bytes_processed.each { |b| yielder << b }
+            bytes_processed.each { |b| yielder << SymbolLiteral.new(b) }
           else
-            yielder << [longest_match[:offset], longest_match[:length]]
+            yielder << SymbolReference.new(offset: longest_match[:offset], length: longest_match[:length])
           end
 
           recent_window.add_bytes(bytes_processed)

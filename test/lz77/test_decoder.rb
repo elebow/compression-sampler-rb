@@ -5,7 +5,14 @@ require "lz77/decoder"
 
 class TestLZ77Decoder < Minitest::Test
   def test_decode
-    decoded = LZ77::Decoder.decode([97, 98, 99, [3, 3], 100, [4, 3]]).to_a
+    decoded = LZ77::Decoder.decode(
+      [LZ77::SymbolLiteral.new(97),
+       LZ77::SymbolLiteral.new(98),
+       LZ77::SymbolLiteral.new(99),
+       LZ77::SymbolReference.new(offset: 3, length: 3),
+       LZ77::SymbolLiteral.new(100),
+       LZ77::SymbolReference.new(offset: 4, length: 3)]
+    ).to_a
 
     assert_equal "abcabcdabc", decoded.map(&:chr).join
   end

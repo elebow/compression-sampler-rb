@@ -1,7 +1,9 @@
 # frozen_string_literal: true
 
+require "lz77/encoder"
+
 module LZ77
-  # Decodes LZ77 data. The input is an array containing byte literals or 2-tuples of [offset, length] references.
+  # Decodes LZ77 data. The input is an array containing SymbolLiterals and SymbolReferences.
   class Decoder
     attr_accessor :input
 
@@ -17,12 +19,10 @@ module LZ77
       Enumerator.new do |yielder|
         output = []
         input.each do |element|
-          if element.instance_of?(Integer)
-            # element is a literal, so just echo it
-            output.append(element)
+          if element.instance_of?(SymbolLiteral)
+            output.append(element.value)
           else
-            # element is a reference of the form [offset, length]
-            element[1].times { output.append(output[-element[0]]) }
+            element.length.times { output.append(output[-element.offset]) }
           end
 
           # TODO output buffer must be at least as long as the encoder's maximum window size
