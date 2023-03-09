@@ -9,8 +9,9 @@ module Huffman
       new(...).encode
     end
 
-    def initialize(input)
+    def initialize(input, print_tree_evolution: nil)
       @input = input
+      @print_tree_evolution = print_tree_evolution
     end
 
     def dict
@@ -42,6 +43,11 @@ module Huffman
 
           trees.append(new_node)
                .sort_by!(&:weight)
+
+          if @print_tree_evolution
+            @print_tree_evolution.puts "\n"
+            trees.each { |tree| @print_tree_evolution.puts tree.to_s }
+          end
         end
         trees
       end
@@ -76,6 +82,14 @@ module Huffman
 
     def leaf_node?
       !symbol.nil?
+    end
+
+    def to_s
+      if leaf_node?
+        "(#{symbol || ' '}, #{weight})"
+      else
+        "(#{symbol || ' '}, #{weight}, (#{children.map(&:to_s).join(', ')}))"
+      end
     end
   end
 end
