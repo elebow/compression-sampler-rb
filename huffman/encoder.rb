@@ -16,7 +16,7 @@ module Huffman
     def dict
       @dict ||= begin
         dict = {}
-        tree.first.report_code(dict, "")
+        trees.first.report_code(dict, "")
         dict
       end
     end
@@ -32,18 +32,18 @@ module Huffman
                             .transform_values(&:count)
     end
 
-    def tree
-      @tree ||= begin
-        tree = frequencies.map { |symbol, weight| TreeNode.new(symbol:, weight:) }
-                          .sort_by(&:weight)
+    def trees
+      @trees ||= begin
+        trees = frequencies.map { |symbol, weight| TreeNode.new(symbol:, weight:) }
+                           .sort_by(&:weight)
 
-        while tree.count > 1
-          new_node = TreeNode.new(symbol: nil, children: tree.shift(2))
+        while trees.count > 1
+          new_node = TreeNode.new(symbol: nil, children: trees.shift(2))
 
-          tree.append(new_node)
-              .sort_by!(&:weight)
+          trees.append(new_node)
+               .sort_by!(&:weight)
         end
-        tree
+        trees
       end
     end
   end
