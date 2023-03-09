@@ -67,7 +67,7 @@ module Huffman
 
     def report_code(dict, prefix)
       if leaf_node?
-        dict[symbol] = prefix.to_i(2).to_s(2)
+        dict[symbol] = prefix
       else
         children[0].report_code(dict, "#{prefix}0")
         children[1].report_code(dict, "#{prefix}1")
