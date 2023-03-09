@@ -5,8 +5,8 @@ module Huffman
   class Encoder
     attr_accessor :input
 
-    def self.encode(input)
-      new(input).encode
+    def self.encode(...)
+      new(...).encode
     end
 
     def initialize(input)

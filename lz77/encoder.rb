@@ -10,8 +10,8 @@ module LZ77
   class Encoder
     attr_accessor :input, :recent_window
 
-    def self.encode(input)
-      new(input).encode
+    def self.encode(...)
+      new(...).encode
     end
 
     def initialize(input, window_size: nil)
